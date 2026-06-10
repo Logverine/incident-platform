@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/alerts")
@@ -21,6 +23,16 @@ public class AlertController {
         this.alertService = alertService;
     }
 
+    @GetMapping
+    public List<AlertResponse> getAllAlerts() {
+        return alertService.getAllAlerts();
+    }
+
+    @GetMapping("/{id}")
+    public AlertResponse getAlertById( @PathVariable("id") Long id ) {
+        return alertService.getAlertById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create Alert")
@@ -29,4 +41,6 @@ public class AlertController {
     ) {
         return alertService.createAlert(request);
     }
+
+
 }
