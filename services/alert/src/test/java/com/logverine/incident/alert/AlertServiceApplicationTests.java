@@ -1,4 +1,4 @@
-package com.logverine.incident.alert_service;
+package com.logverine.incident.alert;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.logverine.incident.alert_service.controller;
+package com.logverine.incident.alert.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
