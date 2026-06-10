@@ -5,6 +5,7 @@ public record AlertResponse(
         String source,
         String severity,
         String message,
-        String status
+        String status,
+        String createdAt
 ) {
 }
