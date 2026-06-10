@@ -9,7 +9,7 @@
         <relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>alert-service</artifactId>
+	<artifactId>alert</artifactId>
 
 	<properties>
 		<java.version>21</java.version>
@@ -89,6 +89,10 @@
 						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<source>16</source>
+					<target>16</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

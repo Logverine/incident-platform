@@ -1,4 +1,4 @@
-package com.logverine.incident.alert_service;
+package com.logverine.incident.alert;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
