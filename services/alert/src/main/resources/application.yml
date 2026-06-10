@@ -8,8 +8,10 @@ spring:
     password: pass@123
 
   flyway:
-    enabled: false
+    enabled: true
 
   jpa:
     hibernate:
       ddl-auto: none
+
+    show-sql: true
