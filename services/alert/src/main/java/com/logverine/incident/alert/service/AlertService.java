@@ -6,6 +6,7 @@ import com.logverine.incident.alert.entity.Alert;
 
 import java.time.LocalDateTime;
 
+import com.logverine.incident.alert.entity.AlertStatus;
 import com.logverine.incident.alert.exception.AlertNotFoundException;
 import com.logverine.incident.alert.repository.AlertJpaRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class AlertService {
                 .source(request.source())
                 .severity(request.severity())
                 .message(request.message())
-                .status("CREATED")
+                .status(AlertStatus.CREATED)
                 .createdAt(LocalDateTime.now())
                 .build();
         alertRepository.save(alert);
@@ -37,7 +38,7 @@ public class AlertService {
                 alert.getSource(),
                 alert.getSeverity(),
                 alert.getMessage(),
-                alert.getStatus(),
+                alert.getStatus().toString(),
                 alert.getCreatedAt().toString()
         );
     }
@@ -51,7 +52,7 @@ public class AlertService {
                         alert.getSource(),
                         alert.getSeverity(),
                         alert.getMessage(),
-                        alert.getStatus(),
+                        alert.getStatus().toString(),
                         alert.getCreatedAt().toString()
                 ))
                 .toList();
@@ -69,7 +70,7 @@ public class AlertService {
                 alert.getSource(),
                 alert.getSeverity(),
                 alert.getMessage(),
-                alert.getStatus(),
+                alert.getStatus().toString(),
                 alert.getCreatedAt().toString()
         );
     }
