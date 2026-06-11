@@ -6,6 +6,7 @@ import com.logverine.incident.alert.entity.Alert;
 
 import java.time.LocalDateTime;
 
+import com.logverine.incident.alert.exception.AlertNotFoundException;
 import com.logverine.incident.alert.repository.AlertJpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +60,7 @@ public class AlertService {
     public AlertResponse getAlertById(Long id) {
 
         Alert alert = alertRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(
+                .orElseThrow(() -> new AlertNotFoundException(
                         "Alert not found with id: " + id
                 ));
 
