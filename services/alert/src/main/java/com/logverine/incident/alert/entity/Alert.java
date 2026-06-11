@@ -24,7 +24,8 @@ public class Alert {
 
     private String message;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private AlertStatus status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
