@@ -3,36 +3,32 @@ package com.logverine.incident.alert.service;
 import com.logverine.incident.alert.dto.AlertResponse;
 import com.logverine.incident.alert.dto.CreateAlertRequest;
 import com.logverine.incident.alert.entity.Alert;
-import com.logverine.incident.alert.entity.AlertStatus;
 
 import java.time.LocalDateTime;
 
-import com.logverine.incident.alert.repository.AlertRepository;
+import com.logverine.incident.alert.repository.AlertJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class AlertService {
 
-    private final AlertRepository alertRepository;
-    private final AtomicLong idGenerator = new AtomicLong();
+    private final AlertJpaRepository alertRepository;
 
-    public AlertService(AlertRepository alertRepository) {
+    public AlertService(AlertJpaRepository alertRepository) {
         this.alertRepository = alertRepository;
     }
 
     public AlertResponse createAlert(CreateAlertRequest request) {
 
-        Alert alert = new Alert(
-                idGenerator.incrementAndGet(),
-                request.source(),
-                request.severity(),
-                request.message(),
-                AlertStatus.CREATED,
-                LocalDateTime.now()
-        );
+        Alert alert = Alert.builder()
+                .source(request.source())
+                .severity(request.severity())
+                .message(request.message())
+                .status("CREATED")
+                .createdAt(LocalDateTime.now())
+                .build();
         alertRepository.save(alert);
 
         return new AlertResponse(
@@ -40,7 +36,7 @@ public class AlertService {
                 alert.getSource(),
                 alert.getSeverity(),
                 alert.getMessage(),
-                alert.getStatus().name(),
+                alert.getStatus(),
                 alert.getCreatedAt().toString()
         );
     }
@@ -54,7 +50,7 @@ public class AlertService {
                         alert.getSource(),
                         alert.getSeverity(),
                         alert.getMessage(),
-                        alert.getStatus().name(),
+                        alert.getStatus(),
                         alert.getCreatedAt().toString()
                 ))
                 .toList();
@@ -72,7 +68,7 @@ public class AlertService {
                 alert.getSource(),
                 alert.getSeverity(),
                 alert.getMessage(),
-                alert.getStatus().name(),
+                alert.getStatus(),
                 alert.getCreatedAt().toString()
         );
     }
