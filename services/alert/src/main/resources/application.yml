@@ -3,7 +3,7 @@ spring:
     name: alert-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/incident_db
+    url: jdbc:postgresql://host.docker.internal:5432/incident_db
     username: postgres
     password: pass@123
 
