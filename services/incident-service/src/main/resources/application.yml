@@ -1,9 +1,9 @@
 spring:
   application:
-    name: alert-service
+    name: incident-service
 
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/incident_db
+    url: jdbc:postgresql://localhost:5432/incident_db
     username: postgres
     password: pass@123
 
@@ -21,4 +21,4 @@ spring:
     show-sql: true
 
 server:
-  port: 8080
+  port: 8081
