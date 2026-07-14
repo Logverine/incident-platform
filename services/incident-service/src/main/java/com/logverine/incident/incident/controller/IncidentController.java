@@ -6,6 +6,9 @@ import com.logverine.incident.incident.dto.response.IncidentResponse;
 import com.logverine.incident.incident.service.IncidentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,10 +38,9 @@ public class IncidentController {
     }
 
     @GetMapping
-    public List<IncidentResponse> getAllIncidents() {
-        return incidentService.getAllIncidents();
+    public Page<IncidentResponse> getAllIncidents(@ParameterObject Pageable pageable) {
+        return incidentService.getAllIncidents(pageable);
     }
-
     @PutMapping("/{id}")
     public IncidentResponse updateIncident(
             @PathVariable("id") UUID id,

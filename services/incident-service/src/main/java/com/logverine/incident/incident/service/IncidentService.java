@@ -9,9 +9,10 @@ import com.logverine.incident.incident.exception.IncidentNotFoundException;
 import com.logverine.incident.incident.mapper.IncidentMapper;
 import com.logverine.incident.incident.repository.IncidentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,12 +47,10 @@ public class IncidentService {
         return incidentMapper.toResponse(incident);
     }
 
-    public List<IncidentResponse> getAllIncidents() {
+    public Page<IncidentResponse> getAllIncidents(Pageable pageable) {
 
-        return incidentRepository.findAll()
-                .stream()
-                .map(incidentMapper::toResponse)
-                .toList();
+        return incidentRepository.findAll(pageable)
+                .map(incidentMapper::toResponse);
     }
 
     public IncidentResponse updateIncident(UUID id, UpdateIncidentRequest request) {
