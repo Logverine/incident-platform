@@ -62,11 +62,15 @@ public class IncidentController {
             @RequestParam(name = "priority", required = false)
             Priority priority,
 
+            @RequestParam(name = "title", required = false)
+            String title,
+
             @ParameterObject Pageable pageable) {
 
         return incidentService.getAllIncidents(
                 status,
                 priority,
+                title,
                 pageable);
     }
 }

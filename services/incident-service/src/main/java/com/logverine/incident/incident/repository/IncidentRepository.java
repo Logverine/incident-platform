@@ -24,4 +24,8 @@ public interface IncidentRepository extends JpaRepository<Incident, UUID> {
             IncidentStatus status,
             Priority priority,
             Pageable pageable);
+
+    Page<Incident> findByTitleContainingIgnoreCase(
+            String title,
+            Pageable pageable);
 }

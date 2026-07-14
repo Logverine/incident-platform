@@ -83,20 +83,29 @@ public class IncidentService {
     public Page<IncidentResponse> getAllIncidents(
             IncidentStatus status,
             Priority priority,
+            String title,
             Pageable pageable) {
 
         Page<Incident> incidents;
 
-        if (status != null && priority != null) {
-            incidents = incidentRepository.findByStatusAndPriority(status, priority, pageable);
+        if (title != null && !title.isBlank()) {
+            incidents = incidentRepository
+                    .findByTitleContainingIgnoreCase(title, pageable);
+        } else if (status != null && priority != null) {
+            incidents = incidentRepository
+                    .findByStatusAndPriority(status, priority, pageable);
         } else if (status != null) {
-            incidents = incidentRepository.findByStatus(status, pageable);
+            incidents = incidentRepository
+                    .findByStatus(status, pageable);
         } else if (priority != null) {
-            incidents = incidentRepository.findByPriority(priority, pageable);
+            incidents = incidentRepository
+                    .findByPriority(priority, pageable);
         } else {
-            incidents = incidentRepository.findAll(pageable);
+            incidents = incidentRepository
+                    .findAll(pageable);
         }
-
         return incidents.map(incidentMapper::toResponse);
     }
+
+
 }
