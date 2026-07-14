@@ -3,6 +3,8 @@ package com.logverine.incident.incident.controller;
 import com.logverine.incident.incident.dto.request.IncidentRequest;
 import com.logverine.incident.incident.dto.request.UpdateIncidentRequest;
 import com.logverine.incident.incident.dto.response.IncidentResponse;
+import com.logverine.incident.incident.enums.IncidentStatus;
+import com.logverine.incident.incident.enums.Priority;
 import com.logverine.incident.incident.service.IncidentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +39,6 @@ public class IncidentController {
         return incidentService.getIncidentById(id);
     }
 
-    @GetMapping
-    public Page<IncidentResponse> getAllIncidents(@ParameterObject Pageable pageable) {
-        return incidentService.getAllIncidents(pageable);
-    }
     @PutMapping("/{id}")
     public IncidentResponse updateIncident(
             @PathVariable("id") UUID id,
@@ -53,5 +51,22 @@ public class IncidentController {
     public void deleteIncident(@PathVariable("id") UUID id) {
 
         incidentService.deleteIncident(id);
+    }
+
+    @GetMapping
+    public Page<IncidentResponse> getAllIncidents(
+
+            @RequestParam(name = "status", required = false)
+            IncidentStatus status,
+
+            @RequestParam(name = "priority", required = false)
+            Priority priority,
+
+            @ParameterObject Pageable pageable) {
+
+        return incidentService.getAllIncidents(
+                status,
+                priority,
+                pageable);
     }
 }

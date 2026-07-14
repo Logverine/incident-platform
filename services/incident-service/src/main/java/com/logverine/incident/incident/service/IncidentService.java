@@ -5,6 +5,7 @@ import com.logverine.incident.incident.dto.request.UpdateIncidentRequest;
 import com.logverine.incident.incident.dto.response.IncidentResponse;
 import com.logverine.incident.incident.entity.Incident;
 import com.logverine.incident.incident.enums.IncidentStatus;
+import com.logverine.incident.incident.enums.Priority;
 import com.logverine.incident.incident.exception.IncidentNotFoundException;
 import com.logverine.incident.incident.mapper.IncidentMapper;
 import com.logverine.incident.incident.repository.IncidentRepository;
@@ -77,5 +78,25 @@ public class IncidentService {
                         new IncidentNotFoundException("Incident not found with id: " + id));
 
         incidentRepository.delete(incident);
+    }
+
+    public Page<IncidentResponse> getAllIncidents(
+            IncidentStatus status,
+            Priority priority,
+            Pageable pageable) {
+
+        Page<Incident> incidents;
+
+        if (status != null && priority != null) {
+            incidents = incidentRepository.findByStatusAndPriority(status, priority, pageable);
+        } else if (status != null) {
+            incidents = incidentRepository.findByStatus(status, pageable);
+        } else if (priority != null) {
+            incidents = incidentRepository.findByPriority(priority, pageable);
+        } else {
+            incidents = incidentRepository.findAll(pageable);
+        }
+
+        return incidents.map(incidentMapper::toResponse);
     }
 }
