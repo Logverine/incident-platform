@@ -30,8 +30,6 @@ public class IncidentService {
                 .priority(request.priority())
                 .source(request.source())
                 .status(IncidentStatus.OPEN)
-                .createdAt(Instant.now())
-                .updatedAt(Instant.now())
                 .build();
 
         Incident saved = incidentRepository.save(incident);
@@ -67,7 +65,6 @@ public class IncidentService {
         incident.setPriority(request.priority());
         incident.setStatus(request.status());
         incident.setAssignee(request.assignee());
-        incident.setUpdatedAt(Instant.now());
 
         Incident updated = incidentRepository.save(incident);
 

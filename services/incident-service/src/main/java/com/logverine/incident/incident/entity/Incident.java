@@ -4,11 +4,15 @@ import com.logverine.incident.incident.enums.IncidentStatus;
 import com.logverine.incident.incident.enums.Priority;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(
         name = "incidents",
         indexes = {
@@ -48,9 +52,10 @@ public class Incident {
     @Column(nullable = false, length = 100)
     private String source;
 
-    @Column(name = "created_at", nullable = false)
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
+    @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
-}
+    private Instant updatedAt;}
