@@ -6,6 +6,7 @@ import com.logverine.incident.incident.dto.response.IncidentResponse;
 import com.logverine.incident.incident.entity.Incident;
 import com.logverine.incident.incident.enums.IncidentStatus;
 import com.logverine.incident.incident.exception.IncidentNotFoundException;
+import com.logverine.incident.incident.mapper.IncidentMapper;
 import com.logverine.incident.incident.repository.IncidentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class IncidentService {
 
     private final IncidentRepository incidentRepository;
+    private final IncidentMapper incidentMapper;
 
     public IncidentResponse createIncident(IncidentRequest request) {
 
@@ -34,17 +36,7 @@ public class IncidentService {
 
         Incident saved = incidentRepository.save(incident);
 
-        return new IncidentResponse(
-                saved.getId(),
-                saved.getTitle(),
-                saved.getDescription(),
-                saved.getPriority(),
-                saved.getStatus(),
-                saved.getAssignee(),
-                saved.getSource(),
-                saved.getCreatedAt(),
-                saved.getUpdatedAt()
-        );
+        return incidentMapper.toResponse(saved);
     }
 
     public IncidentResponse getIncidentById(UUID id) {
@@ -53,34 +45,14 @@ public class IncidentService {
                 .orElseThrow(() ->
                         new IncidentNotFoundException("Incident not found with id: " + id));
 
-        return new IncidentResponse(
-                incident.getId(),
-                incident.getTitle(),
-                incident.getDescription(),
-                incident.getPriority(),
-                incident.getStatus(),
-                incident.getAssignee(),
-                incident.getSource(),
-                incident.getCreatedAt(),
-                incident.getUpdatedAt()
-        );
+        return incidentMapper.toResponse(incident);
     }
 
     public List<IncidentResponse> getAllIncidents() {
 
         return incidentRepository.findAll()
                 .stream()
-                .map(incident -> new IncidentResponse(
-                        incident.getId(),
-                        incident.getTitle(),
-                        incident.getDescription(),
-                        incident.getPriority(),
-                        incident.getStatus(),
-                        incident.getAssignee(),
-                        incident.getSource(),
-                        incident.getCreatedAt(),
-                        incident.getUpdatedAt()
-                ))
+                .map(incidentMapper::toResponse)
                 .toList();
     }
 
@@ -99,17 +71,7 @@ public class IncidentService {
 
         Incident updated = incidentRepository.save(incident);
 
-        return new IncidentResponse(
-                updated.getId(),
-                updated.getTitle(),
-                updated.getDescription(),
-                updated.getPriority(),
-                updated.getStatus(),
-                updated.getAssignee(),
-                updated.getSource(),
-                updated.getCreatedAt(),
-                updated.getUpdatedAt()
-        );
+        return incidentMapper.toResponse(updated);
     }
 
     public void deleteIncident(UUID id) {
