@@ -3,6 +3,7 @@ services:
   postgres:
     image: postgres:17
     container_name: incident-postgres
+    restart: unless-stopped
 
     environment:
       POSTGRES_DB: incident_db
@@ -21,9 +22,11 @@ services:
       dockerfile: Dockerfile
 
     container_name: alert-service
+    restart: unless-stopped
 
     depends_on:
       - postgres
+      - kafka
 
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/incident_db
@@ -32,6 +35,59 @@ services:
 
     ports:
       - "8080:8080"
+
+  incident-service:
+    build:
+      context: ../services/incident-service
+      dockerfile: Dockerfile
+
+    container_name: incident-service
+    restart: unless-stopped
+
+    depends_on:
+      - postgres
+      - kafka
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/incident_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: pass@123
+
+    ports:
+      - "8081:8081"
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    restart: unless-stopped
+
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    restart: unless-stopped
+
+    depends_on:
+      - zookeeper
+
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 volumes:
   postgres-data:
