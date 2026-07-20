@@ -3,15 +3,21 @@ spring:
     name: alert-service
 
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/incident_db
+    url: jdbc:postgresql://localhost:5432/incident_db
     username: postgres
     password: pass@123
 
   kafka:
     bootstrap-servers: localhost:29092
 
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
   flyway:
     enabled: true
+    schemas: alert
+    default-schema: alert
 
   jackson:
     time-zone: Asia/Kolkata
@@ -20,6 +26,7 @@ spring:
     hibernate:
       ddl-auto: none
     properties:
+      hibernate.default_schema: alert
       hibernate.jdbc.time_zone: UTC
     show-sql: true
 

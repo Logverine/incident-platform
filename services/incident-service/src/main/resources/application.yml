@@ -12,6 +12,8 @@ spring:
 
   flyway:
     enabled: true
+    schemas: incident
+    default-schema: incident
 
   jackson:
     time-zone: Asia/Kolkata
@@ -20,6 +22,7 @@ spring:
     hibernate:
       ddl-auto: none
     properties:
+      hibernate.default_schema: incident
       hibernate.jdbc.time_zone: UTC
     show-sql: true
 
