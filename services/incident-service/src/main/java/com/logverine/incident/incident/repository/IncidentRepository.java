@@ -28,4 +28,6 @@ public interface IncidentRepository extends JpaRepository<Incident, UUID> {
     Page<Incident> findByTitleContainingIgnoreCase(
             String title,
             Pageable pageable);
+
+    boolean existsByAlertId(Long alertId);
 }

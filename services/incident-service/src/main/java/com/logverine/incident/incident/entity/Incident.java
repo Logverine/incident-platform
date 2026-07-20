@@ -32,6 +32,9 @@ public class Incident {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(name = "alert_id", nullable = false, unique = true)
+    private Long alertId;
+
     @Column(nullable = false, length = 255)
     private String title;
 

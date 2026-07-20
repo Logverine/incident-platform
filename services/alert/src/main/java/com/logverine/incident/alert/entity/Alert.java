@@ -1,5 +1,6 @@
 package com.logverine.incident.alert.entity;
 
+import com.logverine.incident.common.kafka.enums.Priority;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +21,7 @@ public class Alert {
 
     private String source;
 
-    private String severity;
+    private Priority priority;
 
     private String message;
 

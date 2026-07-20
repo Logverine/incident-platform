@@ -30,7 +30,7 @@ public class AlertService {
 
         Alert alert = Alert.builder()
                 .source(request.source())
-                .severity(request.severity())
+                .priority(request.priority())
                 .message(request.message())
                 .status(AlertStatus.CREATED)
                 .createdAt(LocalDateTime.now())
@@ -41,7 +41,7 @@ public class AlertService {
                 new AlertCreatedEvent(
                         savedAlert.getId(),
                         savedAlert.getSource(),
-                        savedAlert.getSeverity(),
+                        savedAlert.getPriority(),
                         savedAlert.getMessage(),
                         savedAlert.getCreatedAt()
                 )
@@ -50,7 +50,7 @@ public class AlertService {
         return new AlertResponse(
                 alert.getId(),
                 alert.getSource(),
-                alert.getSeverity(),
+                alert.getPriority(),
                 alert.getMessage(),
                 alert.getStatus().toString(),
                 alert.getCreatedAt().toString()
@@ -64,7 +64,7 @@ public class AlertService {
                 .map(alert -> new AlertResponse(
                         alert.getId(),
                         alert.getSource(),
-                        alert.getSeverity(),
+                        alert.getPriority(),
                         alert.getMessage(),
                         alert.getStatus().toString(),
                         alert.getCreatedAt().toString()
@@ -82,7 +82,7 @@ public class AlertService {
         return new AlertResponse(
                 alert.getId(),
                 alert.getSource(),
-                alert.getSeverity(),
+                alert.getPriority(),
                 alert.getMessage(),
                 alert.getStatus().toString(),
                 alert.getCreatedAt().toString()
