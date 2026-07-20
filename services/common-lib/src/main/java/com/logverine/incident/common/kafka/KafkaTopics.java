@@ -1,4 +1,4 @@
-package com.logverine.incident.common.kafka.event;
+package com.logverine.incident.common.kafka;
 
 public final class KafkaTopics {
     private KafkaTopics() {

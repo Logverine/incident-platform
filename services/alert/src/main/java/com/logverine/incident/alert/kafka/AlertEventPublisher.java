@@ -1,6 +1,6 @@
 package com.logverine.incident.alert.kafka;
 
-import com.logverine.incident.common.kafka.event.KafkaTopics;
+import com.logverine.incident.common.kafka.KafkaTopics;
 import com.logverine.incident.common.kafka.event.AlertCreatedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
