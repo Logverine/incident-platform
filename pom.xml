@@ -15,6 +15,7 @@
         <module>services/common-lib</module>
         <module>services/alert</module>
         <module>services/incident-service</module>
+        <module>services/api-gateway</module>
     </modules>
 
     <properties>
