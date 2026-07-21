@@ -1,7 +1,7 @@
 package com.logverine.incident.incident.entity;
 
 import com.logverine.incident.incident.enums.IncidentStatus;
-import com.logverine.incident.incident.enums.Priority;
+import com.logverine.incident.common.kafka.enums.Priority;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

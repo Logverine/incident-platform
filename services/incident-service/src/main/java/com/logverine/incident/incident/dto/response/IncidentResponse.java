@@ -1,7 +1,7 @@
 package com.logverine.incident.incident.dto.response;
 
 import com.logverine.incident.incident.enums.IncidentStatus;
-import com.logverine.incident.incident.enums.Priority;
+import com.logverine.incident.common.kafka.enums.Priority;
 
 import java.time.Instant;
 import java.util.UUID;

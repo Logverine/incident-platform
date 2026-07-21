@@ -2,7 +2,7 @@ package com.logverine.incident.incident.repository;
 
 import com.logverine.incident.incident.entity.Incident;
 import com.logverine.incident.incident.enums.IncidentStatus;
-import com.logverine.incident.incident.enums.Priority;
+import com.logverine.incident.common.kafka.enums.Priority;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

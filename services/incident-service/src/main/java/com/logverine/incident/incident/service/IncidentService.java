@@ -6,7 +6,7 @@ import com.logverine.incident.incident.dto.request.UpdateIncidentRequest;
 import com.logverine.incident.incident.dto.response.IncidentResponse;
 import com.logverine.incident.incident.entity.Incident;
 import com.logverine.incident.incident.enums.IncidentStatus;
-import com.logverine.incident.incident.enums.Priority;
+import com.logverine.incident.common.kafka.enums.Priority;
 import com.logverine.incident.incident.exception.IncidentNotFoundException;
 import com.logverine.incident.incident.mapper.IncidentMapper;
 import com.logverine.incident.incident.repository.IncidentRepository;
@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
-
-import static com.logverine.incident.incident.enums.Priority.*;
 
 @Slf4j
 @Service
@@ -74,12 +72,6 @@ public class IncidentService {
                         new IncidentNotFoundException("Incident not found with id: " + id));
 
         return incidentMapper.toResponse(incident);
-    }
-
-    public Page<IncidentResponse> getAllIncidents(Pageable pageable) {
-
-        return incidentRepository.findAll(pageable)
-                .map(incidentMapper::toResponse);
     }
 
     public IncidentResponse updateIncident(UUID id, UpdateIncidentRequest request) {
