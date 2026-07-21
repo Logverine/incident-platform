@@ -7,8 +7,22 @@ spring:
     username: postgres
     password: pass@123
 
+  kafka:
+    bootstrap-servers: localhost:29092
+
+    consumer:
+      group-id: incident-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+      properties:
+        spring.json.trusted.packages: "com.logverine.incident.common.kafka.event"
+
   flyway:
     enabled: true
+    schemas: incident
+    default-schema: incident
 
   jackson:
     time-zone: Asia/Kolkata
@@ -17,6 +31,7 @@ spring:
     hibernate:
       ddl-auto: none
     properties:
+      hibernate.default_schema: incident
       hibernate.jdbc.time_zone: UTC
     show-sql: true
 

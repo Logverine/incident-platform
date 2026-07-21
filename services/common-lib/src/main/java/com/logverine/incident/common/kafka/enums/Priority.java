@@ -1,4 +1,4 @@
-package com.logverine.incident.incident.enums;
+package com.logverine.incident.common.kafka.enums;
 
 public enum Priority {
     LOW,
@@ -6,4 +6,3 @@ public enum Priority {
     HIGH,
     CRITICAL
 }
-

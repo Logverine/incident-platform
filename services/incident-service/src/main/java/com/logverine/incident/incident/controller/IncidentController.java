@@ -4,7 +4,6 @@ import com.logverine.incident.incident.dto.request.IncidentRequest;
 import com.logverine.incident.incident.dto.request.UpdateIncidentRequest;
 import com.logverine.incident.incident.dto.response.IncidentResponse;
 import com.logverine.incident.incident.enums.IncidentStatus;
-import com.logverine.incident.incident.enums.Priority;
 import com.logverine.incident.incident.service.IncidentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import com.logverine.incident.common.kafka.enums.Priority;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController

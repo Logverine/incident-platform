@@ -32,6 +32,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/incident_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: pass@123
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
     ports:
       - "8080:8080"
@@ -52,6 +53,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/incident_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: pass@123
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
     ports:
       - "8081:8081"

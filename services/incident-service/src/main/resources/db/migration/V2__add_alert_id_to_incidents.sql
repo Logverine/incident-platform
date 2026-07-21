@@ -1,0 +1,2 @@
+ALTER TABLE incidents
+    ADD COLUMN alert_id BIGINT NOT NULL UNIQUE;

@@ -6,6 +6,7 @@ import com.logverine.incident.alert.entity.Alert;
 import com.logverine.incident.alert.entity.AlertStatus;
 import com.logverine.incident.alert.exception.AlertNotFoundException;
 import com.logverine.incident.alert.repository.AlertJpaRepository;
+import com.logverine.incident.common.kafka.enums.Priority;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,7 +36,7 @@ class AlertServiceTest {
         CreateAlertRequest request =
                 new CreateAlertRequest(
                         "payment-service",
-                        "CRITICAL",
+                        Priority.CRITICAL,
                         "Database timeout"
                 );
 
@@ -53,7 +54,7 @@ class AlertServiceTest {
         Alert alert = new Alert(
                 1L,
                 "payment-service",
-                "CRITICAL",
+                Priority.CRITICAL,
                 "Database timeout",
                 AlertStatus.CREATED,
                 LocalDateTime.now()
@@ -88,7 +89,7 @@ class AlertServiceTest {
                 new Alert(
                         1L,
                         "payment-service",
-                        "CRITICAL",
+                        Priority.CRITICAL,
                         "Database timeout",
                         AlertStatus.CREATED,
                         LocalDateTime.now()

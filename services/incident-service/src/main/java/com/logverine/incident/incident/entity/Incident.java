@@ -1,7 +1,7 @@
 package com.logverine.incident.incident.entity;
 
 import com.logverine.incident.incident.enums.IncidentStatus;
-import com.logverine.incident.incident.enums.Priority;
+import com.logverine.incident.common.kafka.enums.Priority;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,6 +31,9 @@ public class Incident {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(name = "alert_id", nullable = false, unique = true)
+    private Long alertId;
 
     @Column(nullable = false, length = 255)
     private String title;
